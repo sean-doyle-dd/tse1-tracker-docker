@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TSE1 ramp tracker</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="wrap">
+  <div class="head-row">
+    <div>
+      <h1>TSE1 ramp tracker</h1>
+      <p class="sub">Security · cloud · containers · networking</p>
+    </div>
+    <div class="status ok" id="status"><span class="dot"></span><span id="status-text">Connected</span></div>
+  </div>
+
+  <div class="banner" id="storage-banner">
+    Can't reach the local server right now. Make sure <code>python app.py</code> is still running, then reload this page.
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="plan">30/60/90 plan</div>
+    <div class="tab" data-tab="log">Ticket log</div>
+  </div>
+
+  <div class="panel active" id="panel-plan">
+    <div class="toolbar">
+      <div class="progress-row" style="flex:1;margin-bottom:0;">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <div class="progress-label" id="progress-label">0 / 0</div>
+      </div>
+    </div>
+    <div id="plan-body"></div>
+  </div>
+
+  <div class="panel" id="panel-log">
+    <div class="stats-row" id="stats-row"></div>
+    <div class="toolbar">
+      <div class="progress-label" id="log-count">0 entries</div>
+      <div class="btn-row">
+        <button class="btn small" id="export-btn">Export</button>
+        <button class="btn small" id="import-btn">Import</button>
+        <input type="file" id="import-file" accept="application/json">
+        <button class="btn primary" id="new-entry-btn">+ Log a ticket</button>
+      </div>
+    </div>
+
+    <div class="log-form" id="log-form">
+      <p class="step-label first">Ticket reference</p>
+      <div class="field" style="margin-bottom:16px;">
+        <input type="text" id="f-ref" placeholder="e.g. CS-48213">
+      </div>
+
+      <p class="step-label">Area</p>
+      <div class="chip-row" id="chips-area"></div>
+
+      <p class="step-label" id="issue-label" style="display:none;">What kind of issue</p>
+      <div class="chip-row" id="chips-issue"></div>
+
+      <p class="step-label">Outcome</p>
+      <div class="chip-row" id="chips-outcome"></div>
+
+      <div class="field">
+        <label>Anything specific to add (optional)</label>
+        <textarea id="f-notes" placeholder="Root cause detail, KB link, follow-up needed..."></textarea>
+      </div>
+
+      <div class="err" id="form-err">Add a ticket reference and pick an area.</div>
+      <div class="form-actions">
+        <button class="btn" id="cancel-entry-btn">Cancel</button>
+        <button class="btn primary" id="save-entry-btn">Save entry</button>
+      </div>
+    </div>
+
+    <div id="log-body"></div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
